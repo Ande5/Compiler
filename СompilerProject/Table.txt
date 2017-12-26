@@ -1,0 +1,27 @@
+for set not neq sqrt [ ] or mult div id const eps
+S
+X
+B
+W
+Y
+E
+K
+D
+G
+C
+A
+F
+R
+for
+set
+not
+neq
+sqrt
+[
+]
+or
+mult
+div
+id
+const
+$
