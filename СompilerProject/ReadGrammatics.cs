@@ -89,14 +89,11 @@ namespace СompilerProject
                 }
             }
         }
-        public void Read_ControlTableUPNN()
+        public void Read_RegulationsNN()
         {
-            //Table.txt
             using (StreamReader read_tab = new StreamReader("NNUP.txt"))
             {
                 int k = 0;
-                //string[] str = read_tab.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
                 while (!read_tab.EndOfStream)
                 {
                     string[] str = read_tab.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

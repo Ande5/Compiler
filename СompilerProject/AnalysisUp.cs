@@ -120,7 +120,7 @@ namespace СompilerProject
             textBox2 = text;
             ReadGrammatics read_grammatics = new ReadGrammatics();
             arrZ = read_grammatics.Read_ControlTable("TableUP.txt");
-            read_grammatics.Read_ControlTableUPNN();
+            read_grammatics.Read_RegulationsNN();
             arrWords = read_grammatics.ListGrammaticsNN;
             Initalize();
             ClearArray();
