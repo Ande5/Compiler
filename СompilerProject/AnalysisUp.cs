@@ -13,8 +13,6 @@ namespace СompilerProject
 {
     class AnalysisUp
     {
-        RichTextBox richTextBox2;
-        TextBox textBox2;
         public string str = "";
         public struct MyRule
         {
@@ -114,17 +112,15 @@ namespace СompilerProject
             Rule[15] = myElem;
         }
         //Мето выввода результата
-        public void StartUP(RichTextBox richtext, TextBox text, string text_start)
+        public void StartUP(RichTextBox richTextAnalysisUp, TextBox textCompiler, string text_start)
         {
-            richTextBox2 = richtext;
-            textBox2 = text;
             ReadGrammatics read_grammatics = new ReadGrammatics();
             arrZ = read_grammatics.Read_ControlTable("TableUP.txt");
             read_grammatics.Read_RegulationsNN();
             arrWords = read_grammatics.ListGrammaticsNN;
             Initalize();
             ClearArray();
-            Up(text_start);
+            Up(text_start, richTextAnalysisUp, textCompiler);
         }
         public void ClearArray()
         {
@@ -133,32 +129,31 @@ namespace СompilerProject
             Array.Clear(Rules, 0, Rules.Length);
             str = "";
         }
-        public void Print(int yy, int zz, int xx)
+        public void Print(int yy, int zz, int xx, RichTextBox richTextAnalysisUp, TextBox textCompiler)
         {
-            int i2;
-            string s1, s2, s3;
-            s1 = ""; i2 = yy;
+            int i2 = yy;
+            string s1 ="", s2, s3;
             while (i2 <= indarr)
             {
                 s1 = s1 + arrWords[arr[i2].number].m_name + " ";
                 i2 = i2 + 1;
             }
-            richTextBox2.Text += "Строка:" + s1 + '\n';
+             richTextAnalysisUp.Text += "Строка:" + s1 + '\n';
             s2 = ""; i2 = 0;
             while (i2 <= zz)
             {
                 s2 = s2 + arrWords[arrS[i2].number].m_name + " ";
                 i2 = i2 + 1;
             }
-            richTextBox2.Text += "Магазин:" + s2 + '\n';
+             richTextAnalysisUp.Text += "Магазин:" + s2 + '\n';
             s3 = ""; i2 = 1;
             while (i2 <= xx)
             {
                 s3 = s3 + (Rules[i2] + 1).ToString() + " ";
                 i2 = i2 + 1;
             }
-            richTextBox2.Text += "Правила:" + s3 + '\n';
-            richTextBox2.Text += "      " + '\n';
+             richTextAnalysisUp.Text += "Правила:" + s3 + '\n';
+             richTextAnalysisUp.Text += "      " + '\n';
         }
         public void MyCompil(int pp, int ts1)
         {
@@ -194,13 +189,13 @@ namespace СompilerProject
             if (pp == 14)
                 arrS[ts1 - 1].m_temp = arrS[ts1].m_temp + " / ";
         }
-        public void algorithm()
+        public void algorithm(RichTextBox richTextAnalysisUp, TextBox textCompiler)
         {
             int Tm, Ts, koli, p10, pr11, pr12;
             Tm = 0; Ts = 0; indR = 0; int go = 0;
             arrS[0].number = 18;
             arrS[0].m_name = "$";
-            Print(Tm, Ts, indR);
+            Print(Tm, Ts, indR, richTextAnalysisUp, textCompiler);
             while (Tm <= indarr)
             {
                 if (arr[Tm].number == 18)
@@ -219,7 +214,7 @@ namespace СompilerProject
                     arrS[Ts].number = arr[Tm].number;
                     arrS[Ts].m_name = arr[Tm].m_name;
                     Tm = Tm + 1;
-                    Print(Tm, Ts, indR);
+                    Print(Tm, Ts, indR, richTextAnalysisUp, textCompiler);
                     go = 2;
                 }
                 if ((arrZ[arrS[Ts].number, arr[Tm].number] == 3) && go != 2 && go != 4)
@@ -249,7 +244,7 @@ namespace СompilerProject
                                 arrS[Ts].m_name = arrWords[(arrS[Ts].number)].m_name;
                                 indR = indR + 1;
                                 Rules[indR] = p10;
-                                Print(Tm, Ts, indR);
+                                Print(Tm, Ts, indR, richTextAnalysisUp, textCompiler);
                                 go = 2;
                             }
                         }
@@ -257,15 +252,15 @@ namespace СompilerProject
                 }
                 if (go != 2 && go != 4)
                 {
-                    richTextBox2.Text = "Ошибка при выполнении восходящего разбора!";
-                    textBox2.Text = "";
+                    richTextAnalysisUp.Text = "Ошибка при выполнении восходящего разбора!";
+                    textCompiler.Text = "";
                     go = 3;
                     Tm = 10000;
                     ClearArray();
                 }
                 if (go != 3)
                 {
-                    textBox2.Text = arrS[1].m_temp;
+                    textCompiler.Text = arrS[1].m_temp;
                 }
                 if (go == 4)
                 {
@@ -344,14 +339,13 @@ namespace СompilerProject
             return 0;
         }
         // Метод восходящего разбора
-        public void Up(string text)
+        public void Up(string text, RichTextBox richTextAnalysisUp, TextBox textCompiler)
         {
             int nach = 0, probel = 1, dop1, k = 0;
             arrS[1].m_temp = "";
-            richTextBox2.Clear();
-            textBox2.Clear();
-            str += text;
-            str += " ";
+            richTextAnalysisUp.Clear();
+            textCompiler.Clear();
+            str += text + " ";
             indarr = 0; indR = 0;
             for (int i = 0; i < str.Length; i++)
             {
@@ -397,7 +391,7 @@ namespace СompilerProject
             if (k != 1)
             {
                 myElement("$", 18);
-                algorithm();
+                algorithm( richTextAnalysisUp, textCompiler);
             }
         }
     }
