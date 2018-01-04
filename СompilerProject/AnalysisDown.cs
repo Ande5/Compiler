@@ -231,12 +231,11 @@ namespace СompilerProject
         public void Initalize_AnalysisDown()
         {
             read_grammatics.Read_Regulation();
-            read_grammatics.Read_ControlTable("ControlTable.txt");
             read_grammatics.Read_ControlTable1();
             arrNT = read_grammatics.ListGrammaticsN;
             arrNTT = read_grammatics.ListGrammaticsNN;
             arrPr = read_grammatics.ListGrammatics;
-            arrZDown = read_grammatics.RuleTable;
+            arrZDown = read_grammatics.Read_ControlTable("ControlTable.txt");
             ScanningKeyNTerminals();
         }
         public void ScanningKeyNTerminals()
