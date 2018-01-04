@@ -16,22 +16,17 @@ namespace СompilerProject
         RichTextBox richTextBox2;
         TextBox textBox2;
         public string str = "";
-        public struct MyWord
-        {
-            public int l;
-            public string w, t;
-        }
         public struct MyRule
         {
             public int p, l;
             public int[] m;
         }
         public int indarr, indR;
-        public MyWord[] arr = new MyWord[1000];
-        public MyWord[] arrS = new MyWord[1000];
-        public MyWord myElemwt = new MyWord();
+        public Grammatics[] arr = new Grammatics[1000];
+        public Grammatics[] arrS = new Grammatics[1000];
+        public Grammatics myElemwt = new Grammatics();
         public MyRule[] Rule = new MyRule[16];
-        public MyWord[] arrWords = new MyWord[19];
+        public List<Grammatics> arrWords = new List<Grammatics>();
         public int[] Rules = new int[1000];
         public int[,] arrZ;
         public void Initalize()
@@ -117,65 +112,6 @@ namespace СompilerProject
             int[] a9 = { 13, 5, 0, 0, 0, 0 };
             myElem.m = a9;
             Rule[15] = myElem;
-
-            MyWord myElemw = new MyWord();
-            myElemw.l = 1;
-            myElemw.w = "S";
-            arrWords[0] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "X";
-            arrWords[1] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "Y";
-            arrWords[2] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "W";
-            arrWords[3] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "R";
-            arrWords[4] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "A";
-            arrWords[5] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "for";
-            arrWords[6] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "set";
-            arrWords[7] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "[";
-            arrWords[8] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "]";
-            arrWords[9] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "not";
-            arrWords[10] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "sqrt";
-            arrWords[11] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "neq";
-            arrWords[12] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "or";
-            arrWords[13] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "mult";
-            arrWords[14] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "div";
-            arrWords[15] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "id";
-            arrWords[16] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "const";
-            arrWords[17] = myElemw;
-            myElemw.l = 1;
-            myElemw.w = "$";
-            arrWords[18] = myElemw;
         }
         //Мето выввода результата
         public void StartUP(RichTextBox richtext, TextBox text, string text_start)
@@ -184,6 +120,8 @@ namespace СompilerProject
             textBox2 = text;
             ReadGrammatics read_grammatics = new ReadGrammatics();
             arrZ = read_grammatics.Read_ControlTable("TableUP.txt");
+            read_grammatics.Read_ControlTableUPNN();
+            arrWords = read_grammatics.ListGrammaticsNN;
             Initalize();
             ClearArray();
             Up(text_start);
@@ -202,14 +140,14 @@ namespace СompilerProject
             s1 = ""; i2 = yy;
             while (i2 <= indarr)
             {
-                s1 = s1 + arrWords[arr[i2].l].w + " ";
+                s1 = s1 + arrWords[arr[i2].number].m_name + " ";
                 i2 = i2 + 1;
             }
             richTextBox2.Text += "Строка:" + s1 + '\n';
             s2 = ""; i2 = 0;
             while (i2 <= zz)
             {
-                s2 = s2 + arrWords[arrS[i2].l].w + " ";
+                s2 = s2 + arrWords[arrS[i2].number].m_name + " ";
                 i2 = i2 + 1;
             }
             richTextBox2.Text += "Магазин:" + s2 + '\n';
@@ -226,68 +164,68 @@ namespace СompilerProject
         {
             pp = pp + 1;
             if (pp == 1)
-                arrS[ts1 - 5].t = "for ( " + arrS[ts1 - 5].t + arrS[ts1 - 4].t + "; " + arrS[ts1 - 2].t + "; " + arrS[ts1 - 1].t + " ) {" + arrS[ts1].t + "} ;";
+                arrS[ts1 - 5].m_temp = "for ( " + arrS[ts1 - 5].m_temp + arrS[ts1 - 4].m_temp + "; " + arrS[ts1 - 2].m_temp + "; " + arrS[ts1 - 1].m_temp + " ) {" + arrS[ts1].m_temp + "} ;";
             if (pp == 2)
-                arrS[ts1 - 6].t = "for ( " + arrS[ts1 - 6].t + arrS[ts1 - 5].t + "; " + arrS[ts1 - 3].t + "; " + arrS[ts1 - 2].t + " ) {" + arrS[ts1 - 1].t + "} ;" + Environment.NewLine + arrS[ts1].t;
+                arrS[ts1 - 6].m_temp = "for ( " + arrS[ts1 - 6].m_temp + arrS[ts1 - 5].m_temp + "; " + arrS[ts1 - 3].m_temp + "; " + arrS[ts1 - 2].m_temp + " ) {" + arrS[ts1 - 1].m_temp + "} ;" + Environment.NewLine + arrS[ts1].m_temp;
             if (pp == 4)
-                arrS[ts1 - 4].t = arrS[ts1 - 3].w + "[ " + arrS[ts1 - 1].t + " ] = ";
+                arrS[ts1 - 4].m_temp = arrS[ts1 - 3].m_name + "[ " + arrS[ts1 - 1].m_temp + " ] = ";
             if (pp == 3)
-                arrS[ts1 - 1].t = arrS[ts1].w + " = ";
+                arrS[ts1 - 1].m_temp = arrS[ts1].m_name + " = ";
             if (pp == 6)
-                arrS[ts1 - 1].t = arrS[ts1 - 1].t + " " + arrS[ts1].t;
+                arrS[ts1 - 1].m_temp = arrS[ts1 - 1].m_temp + " " + arrS[ts1].m_temp;
             if (pp == 8)
-                arrS[ts1].t = arrS[ts1].w;
+                arrS[ts1].m_temp = arrS[ts1].m_name;
             if (pp == 7)
-                arrS[ts1].t = arrS[ts1].w;
+                arrS[ts1].m_temp = arrS[ts1].m_name;
             if (pp == 11)
-                arrS[ts1 - 1].t = "! ( " + arrS[ts1].t + " )";
+                arrS[ts1 - 1].m_temp = "! ( " + arrS[ts1].m_temp + " )";
             if (pp == 10)
-                arrS[ts1 - 1].t = "sqrt ( " + arrS[ts1].t + " )";
+                arrS[ts1 - 1].m_temp = "sqrt ( " + arrS[ts1].m_temp + " )";
             if (pp == 12)
-                arrS[ts1 - 1].t = arrS[ts1 - 1].t + " " + arrS[ts1].t;
+                arrS[ts1 - 1].m_temp = arrS[ts1 - 1].m_temp + " " + arrS[ts1].m_temp;
             if (pp == 9)
-                arrS[ts1 - 3].t = arrS[ts1 - 3].w + "[ " + arrS[ts1 - 1].t + " ] ";
+                arrS[ts1 - 3].m_temp = arrS[ts1 - 3].m_name + "[ " + arrS[ts1 - 1].m_temp + " ] ";
             if (pp == 15)
-                arrS[ts1 - 1].t = arrS[ts1].t + " != ";
+                arrS[ts1 - 1].m_temp = arrS[ts1].m_temp + " != ";
             if (pp == 16)
-                arrS[ts1 - 1].t = arrS[ts1].t + " ^ ";
+                arrS[ts1 - 1].m_temp = arrS[ts1].m_temp + " ^ ";
             if (pp == 13)
-                arrS[ts1 - 1].t = arrS[ts1].t + " * ";
+                arrS[ts1 - 1].m_temp = arrS[ts1].m_temp + " * ";
             if (pp == 14)
-                arrS[ts1 - 1].t = arrS[ts1].t + " / ";
+                arrS[ts1 - 1].m_temp = arrS[ts1].m_temp + " / ";
         }
         public void algorithm()
         {
             int Tm, Ts, koli, p10, pr11, pr12;
             Tm = 0; Ts = 0; indR = 0; int go = 0;
-            arrS[0].l = 18;
-            arrS[0].w = "$";
+            arrS[0].number = 18;
+            arrS[0].m_name = "$";
             Print(Tm, Ts, indR);
             while (Tm <= indarr)
             {
-                if (arr[Tm].l == 18)
+                if (arr[Tm].number == 18)
                 {
                     if (Ts == 1)
                     {
-                        if ((arrS[Ts].l == 0) && (arrS[Ts - 1].l == 18))
+                        if ((arrS[Ts].number == 0) && (arrS[Ts - 1].number == 18))
                         {
                             go = 4;
                         }
                     }
                 }
-                if (((arrZ[arrS[Ts].l, arr[Tm].l] == 1) && go != 4) || ((arrZ[arrS[Ts].l, arr[Tm].l] == 2) && go != 4))
+                if (((arrZ[arrS[Ts].number, arr[Tm].number] == 1) && go != 4) || ((arrZ[arrS[Ts].number, arr[Tm].number] == 2) && go != 4))
                 {
                     Ts = Ts + 1;
-                    arrS[Ts].l = arr[Tm].l;
-                    arrS[Ts].w = arr[Tm].w;
+                    arrS[Ts].number = arr[Tm].number;
+                    arrS[Ts].m_name = arr[Tm].m_name;
                     Tm = Tm + 1;
                     Print(Tm, Ts, indR);
                     go = 2;
                 }
-                if ((arrZ[arrS[Ts].l, arr[Tm].l] == 3) && go != 2 && go != 4)
+                if ((arrZ[arrS[Ts].number, arr[Tm].number] == 3) && go != 2 && go != 4)
                 {
                     koli = 0;
-                    while (arrZ[arrS[Ts - koli].l, arrS[Ts - koli + 1].l] != 1)
+                    while (arrZ[arrS[Ts - koli].number, arrS[Ts - koli + 1].number] != 1)
                     {
                         koli = koli + 1;
                     }
@@ -298,7 +236,7 @@ namespace СompilerProject
                             pr11 = 0;
                             for (pr12 = 0; pr12 < koli; pr12++)
                             {
-                                if (Rule[p10].m[pr12] == arrS[Ts - koli + 1 + pr12].l)
+                                if (Rule[p10].m[pr12] == arrS[Ts - koli + 1 + pr12].number)
                                 {
                                     pr11 = pr11 + 1;
                                 }
@@ -307,8 +245,8 @@ namespace СompilerProject
                             {
                                 MyCompil(p10, Ts);
                                 Ts = Ts - koli + 1;
-                                arrS[Ts].l = Rule[p10].p - 1;
-                                arrS[Ts].w = arrWords[(arrS[Ts].l)].w;
+                                arrS[Ts].number = Rule[p10].p - 1;
+                                arrS[Ts].m_name = arrWords[(arrS[Ts].number)].m_name;
                                 indR = indR + 1;
                                 Rules[indR] = p10;
                                 Print(Tm, Ts, indR);
@@ -327,7 +265,7 @@ namespace СompilerProject
                 }
                 if (go != 3)
                 {
-                    textBox2.Text = arrS[1].t;
+                    textBox2.Text = arrS[1].m_temp;
                 }
                 if (go == 4)
                 {
@@ -352,7 +290,7 @@ namespace СompilerProject
             int jjj, pr3;
             if (str1.Substring(nach1, kon1 + 1 - nach1) == " true" || str1.Substring(nach1, kon1 + 1 - nach1) == " false")
             {
-                return myElement(str1, kon1, nach1);
+                return myElement(str1.Substring(nach1, kon1 + 1 - nach1), 17);
             }
             else
                 if (IsNumber(str1, "0123456789", nach1) == true)
@@ -364,7 +302,7 @@ namespace СompilerProject
                     }
                     if (pr3 == kon1 - nach1)
                     {
-                        return myElement(str1, kon1, nach1);
+                        return myElement(str1.Substring(nach1, kon1 + 1 - nach1), 17);
                     }
                     else
                     {
@@ -375,10 +313,10 @@ namespace СompilerProject
                 }
                 else { return 0; }
         }
-        public int myElement(string str1, int kon1, int nach1)
+        public int myElement(string my_word, int index)
         {
-            myElemwt.l = 17;
-            myElemwt.w = str1.Substring(nach1, kon1 + 1 - nach1);
+            myElemwt.number = index;
+            myElemwt.m_name = my_word;
             arr[indarr] = myElemwt;
             indarr = indarr + 1;
             return 1;
@@ -390,20 +328,16 @@ namespace СompilerProject
             if (str1[nach1] == ' ') nach1 += 1;
             for (ii = 6; ii < 16; ii++)
             {
-                if (kon1 - nach1 + 1 == (arrWords[ii].w).Length)
+                if (kon1 - nach1 + 1 == (arrWords[ii].m_name).Length)
                 {
                     kol = 0;
-                    for (jj = 1; jj <= (arrWords[ii].w).Length; jj++)
+                    for (jj = 1; jj <= (arrWords[ii].m_name).Length; jj++)
                     {
-                        if (str1[nach1 + jj - 1] == arrWords[ii].w[jj - 1]) kol = kol + 1;
+                        if (str1[nach1 + jj - 1] == arrWords[ii].m_name[jj - 1]) kol = kol + 1;
                     }
                     if (kon1 - nach1 + 1 == kol)
                     {
-                        myElemwt.l = ii;
-                        myElemwt.w = arrWords[ii].w;
-                        arr[indarr] = myElemwt;
-                        indarr = indarr + 1;
-                        return ii;
+                        return myElement(arrWords[ii].m_name, ii);
                     }
                 }
             }
@@ -413,7 +347,7 @@ namespace СompilerProject
         public void Up(string text)
         {
             int nach = 0, probel = 1, dop1, k = 0;
-            arrS[1].t = "";
+            arrS[1].m_temp = "";
             richTextBox2.Clear();
             textBox2.Clear();
             str += text;
@@ -432,10 +366,7 @@ namespace СompilerProject
                             {
                                 if ((str.Substring(nach + 1, i - nach - 1)).Length <= 8 && (str.Substring(nach + 1, i - nach - 1)).Length > 0)
                                 {
-                                    myElemwt.l = 16;
-                                    myElemwt.w = str.Substring(nach, i + 1 - nach);
-                                    arr[indarr] = myElemwt;
-                                    indarr = indarr + 1;
+                                    myElement(str.Substring(nach, i + 1 - nach), 16);
                                 }
                                 else
                                 {
@@ -465,9 +396,7 @@ namespace СompilerProject
             }
             if (k != 1)
             {
-                myElemwt.l = 18;
-                myElemwt.w = "$";
-                arr[indarr] = myElemwt;
+                myElement("$", 18);
                 algorithm();
             }
         }

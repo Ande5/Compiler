@@ -87,6 +87,9 @@
     <Content Include="Gr.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="NNUP.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Table.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
