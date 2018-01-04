@@ -183,8 +183,7 @@ namespace СompilerProject
             richTextBox2 = richtext;
             textBox2 = text;
             ReadGrammatics read_grammatics = new ReadGrammatics();
-            read_grammatics.Read_ControlTable("TableUP.txt");
-            arrZ = read_grammatics.RuleTable;
+            arrZ = read_grammatics.Read_ControlTable("TableUP.txt");
             Initalize();
             ClearArray();
             Up(text_start);

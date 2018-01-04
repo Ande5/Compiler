@@ -37,19 +37,10 @@ namespace СompilerProject
             }
         }
 
-        public void Read_ControlTable(string file_name)
+        public int[,] Read_ControlTable(string file_name)
         {
-            //ControlTable.txt
-           // Array.Clear(rule_table, 0, rule_table.Length);
             int widht = System.IO.File.ReadAllLines(file_name).Length;
-          //  int lenght = File.ReadAllLines("ControlTable.txt", Encoding.GetEncoding(1251)).Select(x => x.Length).Max();
-          //  int l = lenght / 3 +1;
-            int length;
-            using (StreamReader read_table = new StreamReader(file_name))
-            {
-                string[] str1 = read_table.ReadLine().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                length = str1.Length;
-            }
+            int length = Length_line_parser(file_name, ',');
             rule_table = new int[widht+1, length];
             int str_number=0;
             using (StreamReader read_table = new StreamReader(file_name))
@@ -64,8 +55,16 @@ namespace СompilerProject
                     str_number++;
                 }
             }
+            return rule_table;
         }
-
+        public int Length_line_parser(string file_name, char symbol)
+        {
+            using (StreamReader read_table = new StreamReader(file_name))
+            {
+                string[] str = read_table.ReadLine().Split(new[] { symbol }, StringSplitOptions.RemoveEmptyEntries);
+                return str.Length;
+            }
+        }
         public void Read_ControlTable1()
         {
             //Table.txt
@@ -103,10 +102,5 @@ namespace СompilerProject
         {
             get { return regulationsNN; }
         }
-        public int[,] RuleTable
-        {
-            get { return rule_table; }
-        }
-
     }
 }
