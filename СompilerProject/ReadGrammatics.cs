@@ -8,17 +8,18 @@ using System.Windows.Forms;
 
 namespace СompilerProject
 {
-    public struct GrammaticsDown
+    public struct Grammatics
     {
         public string m_name;
+        public string m_temp;
         public int number;
     }
     class ReadGrammatics
     {
-       GrammaticsDown rule_down = new GrammaticsDown();
-       List<GrammaticsDown> regulations = new List<GrammaticsDown>();
-       List<GrammaticsDown> regulationsN = new List<GrammaticsDown>();
-       List<GrammaticsDown> regulationsNN = new List<GrammaticsDown>();
+       Grammatics rule_down = new Grammatics();
+       List<Grammatics> regulations = new List<Grammatics>();
+       List<Grammatics> regulationsN = new List<Grammatics>();
+       List<Grammatics> regulationsNN = new List<Grammatics>();
         int [,] rule_table;
         public void Read_Regulation()
         {
@@ -88,17 +89,34 @@ namespace СompilerProject
                 }
             }
         }
+        public void Read_ControlTableUPNN()
+        {
+            //Table.txt
+            using (StreamReader read_tab = new StreamReader("NNUP.txt"))
+            {
+                int k = 0;
+                //string[] str = read_tab.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-        public List<GrammaticsDown> ListGrammatics
+                while (!read_tab.EndOfStream)
+                {
+                    string[] str = read_tab.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    rule_down.m_name = str[0];
+                    rule_down.number = k + 1;
+                    regulationsNN.Add(rule_down);
+                    k++;
+                }
+            }
+        }
+        public List<Grammatics> ListGrammatics
         {
             get { return regulations; }
             set { regulations = value; }
         }
-        public List<GrammaticsDown> ListGrammaticsN
+        public List<Grammatics> ListGrammaticsN
         {
             get { return regulationsN; }
         }
-        public List<GrammaticsDown> ListGrammaticsNN
+        public List<Grammatics> ListGrammaticsNN
         {
             get { return regulationsNN; }
         }

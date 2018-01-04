@@ -12,12 +12,12 @@ namespace СompilerProject
         public string str = "";
         public int[,] arrZDown;
         ReadGrammatics read_grammatics = new ReadGrammatics();
-        List<GrammaticsDown> arrNT, arrNTT, arrPr;
-        public GrammaticsDown[] arrStr = new GrammaticsDown[1000];
+        List<Grammatics> arrNT, arrNTT, arrPr;
+        public Grammatics[] arrStr = new Grammatics[1000];
         public string[] arrM = new string[1000];
-        public GrammaticsDown elemUStr = new GrammaticsDown();
+        public Grammatics elemUStr = new Grammatics();
         public int ind=0;
-        public GrammaticsDown eps, id, constNT;
+        public Grammatics eps, id, constNT;
         //Метод нисходящего разбора
         public void Down(RichTextBox richTextBox1, string text)
         {
@@ -72,7 +72,7 @@ namespace СompilerProject
             }
             if (l != -1) algoritmUp(richTextBox1);
         }
-        public void ElementUpStr(GrammaticsDown element)
+        public void ElementUpStr(Grammatics element)
         {
             elemUStr.m_name = element.m_name;
             elemUStr.number = element.number;
@@ -194,10 +194,10 @@ namespace СompilerProject
                 }
             }
         }
-        public GrammaticsDown[] delFirstDown(GrammaticsDown[] down)
+        public Grammatics[] delFirstDown(Grammatics[] down)
         {
-            GrammaticsDown[] newd = new GrammaticsDown[down.Length - 1];
-            GrammaticsDown elemDel = new GrammaticsDown();
+            Grammatics[] newd = new Grammatics[down.Length - 1];
+            Grammatics elemDel = new Grammatics();
             for (int i = 1; i < down.Length; i++)
             {
                 elemDel.number = down[i].number;
@@ -216,7 +216,7 @@ namespace СompilerProject
             }
             return newM;
         }
-        public void printDown(GrammaticsDown[] arrR, string M, string pr, RichTextBox richTextBox1)
+        public void printDown(Grammatics[] arrR, string M, string pr, RichTextBox richTextBox1)
         {
             string s1="";
             for (int i = 0; i < arrR.Length; i++)
