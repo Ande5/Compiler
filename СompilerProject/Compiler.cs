@@ -11,7 +11,6 @@ using System.Windows.Forms;
 namespace СompilerProject
 {
     //dev
-
     public partial class Compiler : Form
     {
         AnalysisDown analysis_down = new AnalysisDown();
