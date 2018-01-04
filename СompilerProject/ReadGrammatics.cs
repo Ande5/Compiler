@@ -42,8 +42,6 @@ namespace СompilerProject
             //ControlTable.txt
            // Array.Clear(rule_table, 0, rule_table.Length);
             int widht = System.IO.File.ReadAllLines(file_name).Length;
-          //  int lenght = File.ReadAllLines("ControlTable.txt", Encoding.GetEncoding(1251)).Select(x => x.Length).Max();
-          //  int l = lenght / 3 +1;
             int length;
             using (StreamReader read_table = new StreamReader(file_name))
             {
