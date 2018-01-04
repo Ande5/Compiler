@@ -14,6 +14,7 @@ namespace СompilerProject
     public partial class Compiler : Form
     {
         AnalysisDown analysis_down = new AnalysisDown();
+        AnalysisUp analysis_up = new AnalysisUp();
         public Compiler()
         {
             InitializeComponent();
@@ -23,12 +24,19 @@ namespace СompilerProject
         private void butResult_Click(object sender, EventArgs e)
         {
             analysis_down.AnalysisStart(richTextAnalysisDown, textInputData.Text);
+            analysis_up.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
         }
 
         private void richTextAnalysisDown_TextChanged(object sender, EventArgs e)
         {
             richTextAnalysisDown.SelectionStart = richTextAnalysisDown.Text.Length;
             richTextAnalysisDown.ScrollToCaret();
+        }
+
+        private void richTextAnalysisUp_TextChanged(object sender, EventArgs e)
+        {
+            richTextAnalysisUp.SelectionStart = richTextAnalysisUp.Text.Length;
+            richTextAnalysisUp.ScrollToCaret();
         }
     }
 }

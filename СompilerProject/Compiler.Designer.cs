@@ -73,6 +73,7 @@
             this.richTextAnalysisUp.Size = new System.Drawing.Size(440, 96);
             this.richTextAnalysisUp.TabIndex = 3;
             this.richTextAnalysisUp.Text = "";
+            this.richTextAnalysisUp.TextChanged += new System.EventHandler(this.richTextAnalysisUp_TextChanged);
             // 
             // labelDate
             // 

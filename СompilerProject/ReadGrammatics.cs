@@ -37,20 +37,27 @@ namespace СompilerProject
             }
         }
 
-        public void Read_ControlTable()
+        public void Read_ControlTable(string file_name)
         {
             //ControlTable.txt
-            int widht = System.IO.File.ReadAllLines("ControlTable.txt").Length;
-            int lenght = File.ReadAllLines("ControlTable.txt", Encoding.GetEncoding(1251)).Select(x => x.Length).Max();
-            int l = lenght / 3 +1;
-            rule_table = new int[widht+1, l];
+           // Array.Clear(rule_table, 0, rule_table.Length);
+            int widht = System.IO.File.ReadAllLines(file_name).Length;
+          //  int lenght = File.ReadAllLines("ControlTable.txt", Encoding.GetEncoding(1251)).Select(x => x.Length).Max();
+          //  int l = lenght / 3 +1;
+            int length;
+            using (StreamReader read_table = new StreamReader(file_name))
+            {
+                string[] str1 = read_table.ReadLine().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                length = str1.Length;
+            }
+            rule_table = new int[widht+1, length];
             int str_number=0;
-            using (StreamReader read_table = new StreamReader("ControlTable.txt"))
+            using (StreamReader read_table = new StreamReader(file_name))
             {
                 while (!read_table.EndOfStream)
                 {
                     string[] str = read_table.ReadLine().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                    for(int k=0; k< l; k++)
+                    for(int k=0; k< length; k++)
                     {
                         rule_table[str_number, k] = int.Parse(str[k]);
                     }
