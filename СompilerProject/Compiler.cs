@@ -25,6 +25,7 @@ namespace СompilerProject
         {
             analysis_down.AnalysisStart(richTextAnalysisDown, textInputData.Text);
             analysis_up.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
+
         }
 
         private void richTextAnalysisDown_TextChanged(object sender, EventArgs e)
