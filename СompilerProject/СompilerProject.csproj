@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AnalysisDown.cs" />
     <Compile Include="AnalysisUp.cs" />
+    <Compile Include="AnalysisUpOrg.cs" />
     <Compile Include="Compiler.cs">
       <SubType>Form</SubType>
     </Compile>

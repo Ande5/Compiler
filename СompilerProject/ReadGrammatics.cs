@@ -89,9 +89,9 @@ namespace СompilerProject
                 }
             }
         }
-        public void Read_RegulationsNN()
+        public void Read_RegulationsNN(string file_name)
         {
-            using (StreamReader read_tab = new StreamReader("NNUP.txt"))
+            using (StreamReader read_tab = new StreamReader(file_name))
             {
                 int k = 0;
                 while (!read_tab.EndOfStream)

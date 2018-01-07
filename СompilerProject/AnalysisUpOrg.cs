@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace СompilerProject
 {
-    class AnalysisUp
+    class AnalysisUpOrg
     {
         public string str = "";
         public struct MyRule
@@ -27,10 +27,11 @@ namespace СompilerProject
         public List<Grammatics> arrWords = new List<Grammatics>();
         public int[] Rules = new int[1000];
         public int[,] arrZ;
+        public Grammatics eps, id, constNT;
         public void Initalize()
         {
             MyRule myElem = new MyRule();
-            int[] b = { 1, 5, 6, 2, 3, 3, 0 };
+            int[] b = { 1, 5, 6, 2, 3, 3 };
             myElem.p = 1;
             myElem.l = 6;
             myElem.m = b;
@@ -42,74 +43,101 @@ namespace СompilerProject
             Rule[1] = myElem;
             myElem.p = 2;
             myElem.l = 2;
-            int[] d = { 7, 16, 0, 0, 0, 0 };
+            int[] d = { 7, 16 };
             myElem.m = d;
             Rule[2] = myElem;
             myElem.p = 2;
             myElem.l = 5;
-            int[] q = { 7, 16, 8, 2, 9, 0 };
+            int[] q = { 7, 16, 8, 2, 9 };
             myElem.m = q;
             Rule[3] = myElem;
             myElem.p = 3;
             myElem.l = 1;
-            int[] w = { 5, 0, 0, 0, 0, 0 };
+            int[] w = { 5 };
             myElem.m = w;
             Rule[4] = myElem;
             myElem.p = 4;
             myElem.l = 2;
-            int[] e = { 1, 5, 0, 0, 0, 0 };
+            int[] e = { 1, 5 };
             myElem.m = e;
             Rule[5] = myElem;
             myElem.p = 6;
             myElem.l = 1;
-            int[] a = { 16, 0, 0, 0, 0, 0 };
+            int[] a = { 16 };
             myElem.m = a;
             Rule[6] = myElem;
             myElem.p = 6;
             myElem.l = 1;
-            int[] a1 = { 17, 0, 0, 0, 0, 0 };
+            int[] a1 = { 17 };
             myElem.m = a1;
             Rule[7] = myElem;
             myElem.p = 6;
             myElem.l = 4;
-            int[] a2 = { 16, 8, 2, 9, 0, 0 };
+            int[] a2 = { 16, 8, 2, 9 };
             myElem.m = a2;
             Rule[8] = myElem;
             myElem.p = 6;
             myElem.l = 2;
-            int[] a3 = { 11, 5, 0, 0, 0 };
+            int[] a3 = { 11, 5 };
             myElem.m = a3;
             Rule[9] = myElem;
             myElem.p = 6;
             myElem.l = 2;
-            int[] a4 = { 10, 5, 0, 0, 0, 0 };
+            int[] a4 = { 10, 5 };
             myElem.m = a4;
             Rule[10] = myElem;
             myElem.p = 6;
             myElem.l = 2;
-            int[] a5 = { 4, 5, 0, 0, 0, 0 };
+            int[] a5 = { 4, 5 };
             myElem.m = a5;
             Rule[11] = myElem;
             myElem.p = 5;
             myElem.l = 2;
-            int[] a6 = { 14, 5, 0, 0, 0, 0 };
+            int[] a6 = { 14, 5 };
             myElem.m = a6;
             Rule[12] = myElem;
             myElem.p = 5;
             myElem.l = 2;
-            int[] a7 = { 15, 5, 0, 0, 0, 0 };
+            int[] a7 = { 15, 5 };
             myElem.m = a7;
             Rule[13] = myElem;
             myElem.p = 5;
             myElem.l = 2;
-            int[] a8 = { 12, 5, 0, 0, 0, 0 };
+            int[] a8 = { 12, 5 };
             myElem.m = a8;
             Rule[14] = myElem;
             myElem.p = 5;
             myElem.l = 2;
-            int[] a9 = { 13, 5, 0, 0, 0, 0 };
+            int[] a9 = { 13, 5 };
             myElem.m = a9;
             Rule[15] = myElem;
+        }
+        public void ScanningKeyNTerminals()
+        {
+            foreach (var gr in arrWords)
+            {
+                switch (gr.m_name)
+                {
+                    case "$":
+                        {
+                            eps.m_name = gr.m_name;
+                            eps.number = gr.number;
+                            break;
+                        }
+                    case "id":
+                        {
+                            id.m_name = gr.m_name;
+                            id.number = gr.number;
+                            break;
+                        }
+                    case "const":
+                        {
+                            constNT.m_name = gr.m_name;
+                            constNT.number = gr.number;
+                            break;
+                        }
+                }
+            }
         }
         //Мето выввода результата
         public void StartUP(RichTextBox richTextAnalysisUp, TextBox textCompiler, string text_start)
@@ -120,7 +148,10 @@ namespace СompilerProject
             arrWords = read_grammatics.ListGrammaticsNN;
             Initalize();
             ClearArray();
+            ScanningKeyNTerminals();
+            //MessageBox.Show(Convert.ToString(id.m_name));
             Up(text_start, richTextAnalysisUp, textCompiler);
+
         }
         public void ClearArray()
         {
@@ -132,28 +163,28 @@ namespace СompilerProject
         public void Print(int yy, int zz, int xx, RichTextBox richTextAnalysisUp, TextBox textCompiler)
         {
             int i2 = yy;
-            string s1 ="", s2, s3;
+            string s1 = "", s2, s3;
             while (i2 <= indarr)
             {
                 s1 = s1 + arrWords[arr[i2].number].m_name + " ";
                 i2 = i2 + 1;
             }
-             richTextAnalysisUp.Text += "Строка:" + s1 + '\n';
+            richTextAnalysisUp.Text += "Строка:" + s1 + '\n';
             s2 = ""; i2 = 0;
             while (i2 <= zz)
             {
                 s2 = s2 + arrWords[arrS[i2].number].m_name + " ";
                 i2 = i2 + 1;
             }
-             richTextAnalysisUp.Text += "Магазин:" + s2 + '\n';
+            richTextAnalysisUp.Text += "Магазин:" + s2 + '\n';
             s3 = ""; i2 = 1;
             while (i2 <= xx)
             {
                 s3 = s3 + (Rules[i2] + 1).ToString() + " ";
                 i2 = i2 + 1;
             }
-             richTextAnalysisUp.Text += "Правила:" + s3 + '\n';
-             richTextAnalysisUp.Text += "      " + '\n';
+            richTextAnalysisUp.Text += "Правила:" + s3 + '\n';
+            richTextAnalysisUp.Text += "      " + '\n';
         }
         public void MyCompil(int pp, int ts1)
         {
@@ -193,16 +224,18 @@ namespace СompilerProject
         {
             int Tm, Ts, koli, p10, pr11, pr12;
             Tm = 0; Ts = 0; indR = 0; int go = 0;
-            arrS[0].number = 18;
-            arrS[0].m_name = "$";
+
+            //int e = eps.number;
+            arrS[0].number = eps.number - 1;
+            arrS[0].m_name = eps.m_name;
             Print(Tm, Ts, indR, richTextAnalysisUp, textCompiler);
             while (Tm <= indarr)
             {
-                if (arr[Tm].number == 18)
+                if (arr[Tm].number == eps.number - 1)
                 {
                     if (Ts == 1)
                     {
-                        if ((arrS[Ts].number == 0) && (arrS[Ts - 1].number == 18))
+                        if ((arrS[Ts].number == 0) && (arrS[Ts - 1].number == eps.number - 1))
                         {
                             go = 4;
                         }
@@ -224,7 +257,7 @@ namespace СompilerProject
                     {
                         koli = koli + 1;
                     }
-                    for (p10 = 0; p10 < 16; p10++)
+                    for (p10 = 0; p10 < id.number - 1; p10++)
                     {
                         if (Rule[p10].l == koli && go != 2)
                         {
@@ -285,7 +318,7 @@ namespace СompilerProject
             int jjj, pr3;
             if (str1.Substring(nach1, kon1 + 1 - nach1) == " true" || str1.Substring(nach1, kon1 + 1 - nach1) == " false")
             {
-                return myElement(str1.Substring(nach1, kon1 + 1 - nach1), 17);
+                return myElement(str1.Substring(nach1, kon1 + 1 - nach1), constNT.number - 1);
             }
             else
                 if (IsNumber(str1, "0123456789", nach1) == true)
@@ -297,7 +330,7 @@ namespace СompilerProject
                     }
                     if (pr3 == kon1 - nach1)
                     {
-                        return myElement(str1.Substring(nach1, kon1 + 1 - nach1), 17);
+                        return myElement(str1.Substring(nach1, kon1 + 1 - nach1), constNT.number - 1);
                     }
                     else
                     {
@@ -321,7 +354,7 @@ namespace СompilerProject
         {
             int ii, jj, kol;
             if (str1[nach1] == ' ') nach1 += 1;
-            for (ii = 6; ii < 16; ii++)
+            for (ii = 6; ii < id.number - 1; ii++)
             {
                 if (kon1 - nach1 + 1 == (arrWords[ii].m_name).Length)
                 {
@@ -360,7 +393,7 @@ namespace СompilerProject
                             {
                                 if ((str.Substring(nach + 1, i - nach - 1)).Length <= 8 && (str.Substring(nach + 1, i - nach - 1)).Length > 0)
                                 {
-                                    myElement(str.Substring(nach, i + 1 - nach), 16);
+                                    myElement(str.Substring(nach, i + 1 - nach), id.number - 1);
                                 }
                                 else
                                 {
@@ -390,8 +423,8 @@ namespace СompilerProject
             }
             if (k != 1)
             {
-                myElement("$", 18);
-                algorithm( richTextAnalysisUp, textCompiler);
+                myElement(eps.m_name, eps.number - 1);
+                algorithm(richTextAnalysisUp, textCompiler);
             }
         }
     }

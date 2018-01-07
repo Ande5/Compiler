@@ -15,6 +15,7 @@ namespace СompilerProject
     {
         AnalysisDown analysis_down = new AnalysisDown();
         AnalysisUp analysis_up = new AnalysisUp();
+        AnalysisUpOrg analysis_up_org = new AnalysisUpOrg();
         public Compiler()
         {
             InitializeComponent();
@@ -24,7 +25,8 @@ namespace СompilerProject
         private void butResult_Click(object sender, EventArgs e)
         {
             analysis_down.AnalysisStart(richTextAnalysisDown, textInputData.Text);
-            analysis_up.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
+           // analysis_up.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
+            analysis_up_org.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
 
         }
 
