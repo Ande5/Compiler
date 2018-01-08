@@ -65,6 +65,7 @@ namespace СompilerProject
                             {
                                 l = -1;
                                 MessageBox.Show("Длина идентификатора должна быть больше 0 символов!" + '\n' + "Слово № " + (i + 1).ToString() + " является пробелом.");
+                                str = null;
                             }
                         }
                     }
