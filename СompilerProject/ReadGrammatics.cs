@@ -24,7 +24,7 @@ namespace СompilerProject
         public void Read_Regulation()
         {
             //Gr.txt
-            using (StreamReader read_regulation = new StreamReader("GrVr3.txt"))
+            using (StreamReader read_regulation = new StreamReader("GrVr4.txt"))
             {
                 int k = 0;
                 while(!read_regulation.EndOfStream)

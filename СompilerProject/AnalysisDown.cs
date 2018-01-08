@@ -239,7 +239,7 @@ namespace СompilerProject
             arrNT = read_grammatics.ListGrammaticsN;
             arrNTT = read_grammatics.ListGrammaticsNN;
             arrPr = read_grammatics.ListGrammatics;
-            arrZDown = read_grammatics.Read_ControlTable("TabelVr3.txt");
+            arrZDown = read_grammatics.Read_ControlTable("TableVr4.txt");
             ScanningKeyNTerminals();
             ScanningProbels();
           //  MessageBox.Show(Convert.ToString(probels[0].number));
