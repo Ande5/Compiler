@@ -24,7 +24,7 @@ namespace СompilerProject
         public void Read_Regulation()
         {
             //Gr.txt
-            using (StreamReader read_regulation = new StreamReader("Gr.txt"))
+            using (StreamReader read_regulation = new StreamReader("GrVr3.txt"))
             {
                 int k = 0;
                 while(!read_regulation.EndOfStream)
@@ -69,7 +69,7 @@ namespace СompilerProject
         public void Read_ControlTable1()
         {
             //Table.txt
-            using (StreamReader read_tab = new StreamReader("Table.txt"))
+            using (StreamReader read_tab = new StreamReader("TabelGrVr3.txt"))
             {
                 int k = 0;
                 string[] str = read_tab.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

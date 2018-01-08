@@ -19,14 +19,15 @@ namespace СompilerProject
         public Compiler()
         {
             InitializeComponent();
-            textInputData.Text = "set k 6E-1 for neq div k 9E-3 5E-2 set k mult k 3E-15 set x [ mult k k ] div mult x [ div k k ] or y y mult c sqrt z [ k ] set i 5E-1 for neq i 4E-17 set i div i 5E-8 set y [ div i mult i i ] div mult x [ div i i ] mult 5E-2 sqrt y [ i ] not y [ i ]";
+            textInputData.Text = "else := id const then := id const if & id const";
+            //textInputData.Text = "set k 6E-1 for neq div k 9E-3 5E-2 set k mult k 3E-15 set x [ mult k k ] div mult x [ div k k ] or y y mult c sqrt z [ k ] set i 5E-1 for neq i 4E-17 set i div i 5E-8 set y [ div i mult i i ] div mult x [ div i i ] mult 5E-2 sqrt y [ i ] not y [ i ]";
         }
 
         private void butResult_Click(object sender, EventArgs e)
         {
             analysis_down.AnalysisStart(richTextAnalysisDown, textInputData.Text);
            // analysis_up.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
-            analysis_up_org.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
+          //  analysis_up_org.StartUP(richTextAnalysisUp, textCompiler, textInputData.Text);
 
         }
 

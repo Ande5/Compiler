@@ -1,0 +1,22 @@
+else := id [ ] const * & + - eps
+S
+Y
+K
+D
+G
+B
+C
+A
+F
+R
+else
+:=
+id
+[
+]
+const
+*
+&
++
+-
+$

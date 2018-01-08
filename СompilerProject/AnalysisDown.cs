@@ -158,21 +158,21 @@ namespace СompilerProject
                             int p = arrPr[i].number;
                             string[] laaM = M.Split(' ');
                             laaM[0] = ps; M = "";
-                            //if ((p == 2) || (p == 5) || (p == 11))
+                            //if ((p == 7) || (p == 2) || (p==11))
                             //{
-                            //    //for (int k = 1; k < laaM.Length; k++)
-                            //    //{
-                            //    //    M += laaM[k] + " ";
-                            //    //}
-                            //   M = AddProbelM(laaM, M);
+                            //    for (int k = 1; k < laaM.Length; k++)
+                            //    {
+                            //        M += laaM[k] + " ";
+                            //    }
+                            //    //M = AddProbelM(laaM, M);
                             //}
                             //else
                             //{
-                            //    //for (int k = 1; k < laaM.Length; k++)
-                            //    //{
-                            //    //    M += laaM[k] + " ";
-                            //    //}
-                            //    M = AddProbelM(laaM, M);
+                            //    for (int k = 1; k < laaM.Length; k++)
+                            //    {
+                            //        M += laaM[k] + " ";
+                            //    }
+                            //    // M = AddProbelM(laaM, M);
                             //    M = laaM[0] + " " + M;
                             //}
                             ScaningEPSRule(laaM, ref M, p);
@@ -190,7 +190,7 @@ namespace СompilerProject
                 }
                 if (arrZDown[jTr - 1, iTr - 1] == 28)
                 {
-                    richTextBox1.Text = "Ошибка при выполнении нисходящего разбора!";
+                    richTextBox1.Text += "Ошибка при выполнении нисходящего разбора!";
                     Array.Clear(arrStr, 0, arrStr.Length);
                     Array.Clear(arrM, 0, arrM.Length);
                     str = "";
@@ -239,10 +239,11 @@ namespace СompilerProject
             arrNT = read_grammatics.ListGrammaticsN;
             arrNTT = read_grammatics.ListGrammaticsNN;
             arrPr = read_grammatics.ListGrammatics;
-            arrZDown = read_grammatics.Read_ControlTable("ControlTable.txt");
+            arrZDown = read_grammatics.Read_ControlTable("TabelVr3.txt");
             ScanningKeyNTerminals();
             ScanningProbels();
-            MessageBox.Show(Convert.ToString(probels[0].number));
+          //  MessageBox.Show(Convert.ToString(probels[0].number));
+            MessageBox.Show(Convert.ToString(id.number));
         }
         public void ScanningProbels()
         {

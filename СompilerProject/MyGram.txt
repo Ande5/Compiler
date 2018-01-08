@@ -1,0 +1,23 @@
+S ->else W Z
+S ->  
+Z ->then W I
+I ->if Y S
+W ->X A
+X ->:= id B
+B ->  
+B ->[ A C
+D ->[ A C G
+C ->]
+A ->[ A F
+F ->] G
+G ->A
+Y ->A
+A ->id
+A ->const
+A ->R A
+R ->* A
+R ->& A
+R ->+ A
+R ->- A
+R ->| A
+R ->< A
