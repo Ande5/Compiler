@@ -17,7 +17,7 @@ namespace СompilerProject
         public string[] arrM = new string[1000];
         public Grammatics elemUStr = new Grammatics();
         public int ind=0;
-        public Grammatics eps, id, constNT, probel;
+        public Grammatics eps, id, constNT;
         public List<Grammatics> probels = new List<Grammatics>();
         //Метод нисходящего разбора
         public void Down(RichTextBox richTextBox1, string text)
@@ -158,21 +158,24 @@ namespace СompilerProject
                             int p = arrPr[i].number;
                             string[] laaM = M.Split(' ');
                             laaM[0] = ps; M = "";
-                            if ((p == 2) || (p==5) ||(p==11))
-                            {
-                                for (int k = 1; k < laaM.Length; k++)
-                                {
-                                    M += laaM[k] + " ";
-                                }
-                            }
-                            else
-                            {
-                                for (int k = 1; k < laaM.Length; k++)
-                                {
-                                    M += laaM[k] + " ";
-                                }
-                                M = laaM[0] + " " + M;
-                            }
+                            //if ((p == 2) || (p == 5) || (p == 11))
+                            //{
+                            //    //for (int k = 1; k < laaM.Length; k++)
+                            //    //{
+                            //    //    M += laaM[k] + " ";
+                            //    //}
+                            //   M = AddProbelM(laaM, M);
+                            //}
+                            //else
+                            //{
+                            //    //for (int k = 1; k < laaM.Length; k++)
+                            //    //{
+                            //    //    M += laaM[k] + " ";
+                            //    //}
+                            //    M = AddProbelM(laaM, M);
+                            //    M = laaM[0] + " " + M;
+                            //}
+                            M = ScaningEPSRule(laaM, M, p);
                             pr = pr + " " + Convert.ToString(p);
                             printDown(arrStr, M, pr, richTextBox1);
                         }
@@ -239,21 +242,46 @@ namespace СompilerProject
             arrZDown = read_grammatics.Read_ControlTable("ControlTable.txt");
             ScanningKeyNTerminals();
             ScanningProbels();
-            //MessageBox.Show(Convert.ToString(probels[0].number));
+            MessageBox.Show(Convert.ToString(probels[0].number));
         }
         public void ScanningProbels()
         {
-            Grammatics prob = new Grammatics();
+            Grammatics probel = new Grammatics();
             
-            for (int k=0; k< arrNT.Count; k++)
+            for (int k=0; k< arrPr.Count; k++)
             {
-                if (arrNT[k].m_name == "#")
+                if (arrPr[k].m_name == "  ")
                 {
-                    prob.m_name = arrNT[k].m_name;
-                    prob.number = arrNT[k].number;
-                    probels.Add(prob);
+                    probel.m_name = arrPr[k].m_name;
+                    probel.number = arrPr[k].number;
+                    probels.Add(probel);
                 }
             }
+        }
+        public string ScaningEPSRule(string[] laaM, string M, int p)
+        {
+            bool flag = false;
+            foreach (var probel in probels)
+            {
+                if (p == probel.number)
+                {
+                    M = AddProbelM(laaM, M);
+                    flag = true;
+                }
+            }
+            if (flag == false) 
+            {  
+               M = laaM[0] + " " + AddProbelM(laaM, M); 
+            }    
+            return M;
+        }
+        public string AddProbelM(string[] laaM, string M)
+        {
+            for (int k = 1; k < laaM.Length; k++)
+            {
+                M += laaM[k] + " ";
+            }
+            return M;
         }
         public void ScanningKeyNTerminals()
         {
@@ -277,12 +305,6 @@ namespace СompilerProject
                         {
                             constNT.m_name = gr.m_name;
                             constNT.number = gr.number;
-                            break;
-                        }
-                    case " ":
-                        {
-                            probel.m_name = gr.m_name;
-                            probel.number = gr.number;
                             break;
                         }
                 }
