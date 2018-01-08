@@ -17,7 +17,8 @@ namespace СompilerProject
         public string[] arrM = new string[1000];
         public Grammatics elemUStr = new Grammatics();
         public int ind=0;
-        public Grammatics eps, id, constNT;
+        public Grammatics eps, id, constNT, probel;
+        public List<Grammatics> probels = new List<Grammatics>();
         //Метод нисходящего разбора
         public void Down(RichTextBox richTextBox1, string text)
         {
@@ -157,7 +158,7 @@ namespace СompilerProject
                             int p = arrPr[i].number;
                             string[] laaM = M.Split(' ');
                             laaM[0] = ps; M = "";
-                            if ((p == 2) || (p == 5) || (p == 11))
+                            if ((p == 2) || (p==5) ||(p==11))
                             {
                                 for (int k = 1; k < laaM.Length; k++)
                                 {
@@ -237,6 +238,22 @@ namespace СompilerProject
             arrPr = read_grammatics.ListGrammatics;
             arrZDown = read_grammatics.Read_ControlTable("ControlTable.txt");
             ScanningKeyNTerminals();
+            ScanningProbels();
+            //MessageBox.Show(Convert.ToString(probels[0].number));
+        }
+        public void ScanningProbels()
+        {
+            Grammatics prob = new Grammatics();
+            
+            for (int k=0; k< arrNT.Count; k++)
+            {
+                if (arrNT[k].m_name == "#")
+                {
+                    prob.m_name = arrNT[k].m_name;
+                    prob.number = arrNT[k].number;
+                    probels.Add(prob);
+                }
+            }
         }
         public void ScanningKeyNTerminals()
         {
@@ -260,6 +277,12 @@ namespace СompilerProject
                         {
                             constNT.m_name = gr.m_name;
                             constNT.number = gr.number;
+                            break;
+                        }
+                    case " ":
+                        {
+                            probel.m_name = gr.m_name;
+                            probel.number = gr.number;
                             break;
                         }
                 }
