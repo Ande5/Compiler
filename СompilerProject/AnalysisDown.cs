@@ -175,7 +175,7 @@ namespace СompilerProject
                             //    M = AddProbelM(laaM, M);
                             //    M = laaM[0] + " " + M;
                             //}
-                            M = ScaningEPSRule(laaM, M, p);
+                            ScaningEPSRule(laaM, ref M, p);
                             pr = pr + " " + Convert.ToString(p);
                             printDown(arrStr, M, pr, richTextBox1);
                         }
@@ -247,7 +247,7 @@ namespace СompilerProject
         public void ScanningProbels()
         {
             Grammatics probel = new Grammatics();
-            
+            // Для eps правил можно задать свой символ
             for (int k=0; k< arrPr.Count; k++)
             {
                 if (arrPr[k].m_name == "  ")
@@ -258,30 +258,29 @@ namespace СompilerProject
                 }
             }
         }
-        public string ScaningEPSRule(string[] laaM, string M, int p)
+        public void ScaningEPSRule(string[] laaM, ref string M, int p)
         {
             bool flag = false;
             foreach (var probel in probels)
             {
                 if (p == probel.number)
                 {
-                    M = AddProbelM(laaM, M);
+                    AddProbelM(laaM, ref M);
                     flag = true;
                 }
             }
             if (flag == false) 
             {  
-               M = laaM[0] + " " + AddProbelM(laaM, M); 
+               AddProbelM(laaM, ref M);
+               M = laaM[0] + " " + M; 
             }    
-            return M;
         }
-        public string AddProbelM(string[] laaM, string M)
+        public void AddProbelM(string[] laaM, ref string M)
         {
             for (int k = 1; k < laaM.Length; k++)
             {
                 M += laaM[k] + " ";
             }
-            return M;
         }
         public void ScanningKeyNTerminals()
         {
