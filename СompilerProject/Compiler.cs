@@ -19,6 +19,7 @@ namespace СompilerProject
         public Compiler()
         {
             InitializeComponent();
+           // else := id [ id ] + const id then := id [ id ] const if + id id
          //   textInputData.Text = "else := id const then := id const if & id const";
             textInputData.Text = "else := id [ id ] const then := id [ id ] const if < id id else := id [ id ] const then := id [ id ] const if id := id [ id ] const";
             //textInputData.Text = "else := id [ id ] const then := id [ id ] const if < id id else := id [ id ] const then := id [ id ] const if < id id";
