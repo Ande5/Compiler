@@ -244,7 +244,7 @@ namespace СompilerProject
             ScanningKeyNTerminals();
             ScanningProbels();
           //  MessageBox.Show(Convert.ToString(probels[0].number));
-            MessageBox.Show(Convert.ToString(id.number));
+            //MessageBox.Show(Convert.ToString(id.number));
         }
         public void ScanningProbels()
         {
@@ -315,6 +315,7 @@ namespace СompilerProject
         {
             Array.Clear(arrStr, 0, arrStr.Length);
             Array.Clear(arrM,0, arrM.Length);
+            probels.Clear();
             try { arrNT.Clear(); arrNTT.Clear(); arrPr.Clear(); } catch { };
             Initalize_AnalysisDown();
             str = "";
